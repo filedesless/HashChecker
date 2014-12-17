@@ -38,7 +38,7 @@ namespace HashChecker
                 string message = BitConverter.ToString(result).Replace("-", string.Empty);
 
                 //Show it
-                MessageBox.Show(message);
+                textBox1.Text = message;
             }
 
         }
@@ -66,6 +66,11 @@ namespace HashChecker
                 }
             }
             return null;
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            textBox1.Enabled = false;
         }
 
     }
