@@ -2,7 +2,7 @@ HashChecker
 ===========
 HashChecker is a C# .Net software with the purpose of computing checksums for messages or files in the intent of verifying their integrity
 
-Originally developped for:
+Originally developed for:
 https://hightechlowlife.eu
 
 
