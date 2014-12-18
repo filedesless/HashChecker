@@ -2,9 +2,12 @@ HashChecker
 ===========
 HashChecker is a C# .Net software with the purpose of computing checksums for messages or files in the intent of verifying their integrity.
 
->File was downloaded without errors
->File is what the uploader has signed
->Does not give more trust to the said file, just help ensure it is the same
+* Make sure file was downloaded without errors
+* Make sure file is what the uploader has signed
+* Does not prove the file's security, just that it hasn't been changed
+
+Official GitHub webpage at:
+http://aiglebleu.github.io/HashChecker
 
 Originally developed for:
 https://hightechlowlife.eu
@@ -34,10 +37,32 @@ This software can compute the MD5, SHA1, SHA256 or SHA512 checksum of a file, an
 
 IT DOES NOT IN ANY WAY MEAN THAT THE FILE IS NOT DANGEROUS/INFECTED.
 
+>Example 1:
+- Let's say an evil publisher upload an infected file and its computed MD5 checksum
+- You download the file, compute the MD5 hash on your side, and verify that the MD5 hashes correspond
+- Everything looks fine BUT YOU STILL GOT INFECTED!!!
+- Always download from trusted sources, and protect yourself with Anti-virus & Anti-malware. There's sadly nothing this software can do for you.
+
+>Example 2:
+- Now let's say a trusted publisher upload a legit file and its computed SHA256 checksum
+- You download the file, compute the SHA256 hash on your side, and verify that the SHA256 hashes correspond ...
+- And they don't...
+- DO NOT USE THIS FILE!!! It is possibly infected/tampered and we can no longer assume it is what the publisher originally intented to share
+- Try re-downloading the file, from another source if possible or contact the publisher to get more infos
+
+>Example 3:
+- Now let's say a trusted publisher upload a legit file and its computed SHA1 checksum
+- You download the file, compute the SHA1 hash on your side and verify that the SHA1 hashes correspond ...
+- And they do! :D
+- You can finally be sure that the file you downloaded is the file the publisher uploaded. Enjoy!
+
+
+I'd still want to point out that there are ways to get around authenticity of a file and fool hash checking, with for example collision attacks on a compromised uploaded file. You can minimize the risk of this kind of attack by comparing many different checksums (according that they are provided by the publisher) but in the end, it will be more secure if the publisher digitally sign the checksum, ensuring only him could upload this file & hash & signature combination is what was intented to be transmitted, by the person who we thought it was.
+
 HOW TO INSTALL
 ==============
 Standalone executable.
-Just grab HashChecker.exe
+Just grab HashChecker.exe and launch it.
 
 As a .Net program, it currently only supports Windows Operating system.
 
