@@ -3,8 +3,8 @@ HashChecker
 HashChecker is a C# .Net software with the purpose of computing checksums for messages or files in the intent of verifying their integrity.
 
 * Make sure file was downloaded without errors
-* Make sure file is what the uploader has signed
-* Does not prove the file's security, just that it hasn't been changed
+* Help proving file wasn't tampered
+* Does not prove the file's security, neither publisher's authenticity, just that the file hasn't been changed
 
 Official GitHub webpage at:
 http://aiglebleu.github.io/HashChecker
@@ -47,7 +47,7 @@ IT DOES NOT IN ANY WAY MEAN THAT THE FILE IS NOT DANGEROUS/INFECTED.
 - Now let's say a trusted publisher upload a legit file and its computed SHA256 checksum
 - You download the file, compute the SHA256 hash on your side, and verify that the SHA256 hashes correspond ...
 - And they don't...
-- DO NOT USE THIS FILE!!! It is possibly infected/tampered and we can no longer assume it is what the publisher originally intented to share
+- DO NOT USE THIS FILE!!! It is possibly infected/tampered/broken and we can no longer assume it is what the publisher originally intented to share
 - Try re-downloading the file, from another source if possible or contact the publisher to get more infos
 
 >Example 3:
