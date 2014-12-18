@@ -25,6 +25,6 @@ Project licensied under MIT License, see ./LICENSE.md for more informations
 CHANGELOG
 =========
 2014-12-17:
--Release V1.0 is out
+>Release V1.0 is out
 
  
