@@ -16,3 +16,7 @@ https://hightechlowlife.eu
                  88       88   gg,   88       dP" "88P       dP" "88P             
                  88       Y8,   "Yb,,8P       Yb,_,d88b,,_   Yb,_,d88b,,_         
                  88       `Y8     "Y8P'        "Y8P"  "Y88888 "Y8P"  "Y88888       
+
+
+
+Project licensied under MIT License, see ./LICENSE.md for more informations
