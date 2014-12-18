@@ -12,7 +12,8 @@ namespace HashChecker
         /// Compute the checksum of a chosen file
         /// </summary>
         /// <param name="output">Textbox where the calculated sum must be showed</param>
-        public void computeSHA1(TextBox output)
+        /// <param name="Algorithm">Algorithm to use (SHA1, MD5 ...)</param>
+        public void compute(TextBox input, TextBox output)
         {
             //Take a stream of data from a file
             Stream file = chooseFile();
@@ -20,17 +21,38 @@ namespace HashChecker
             //If the file was readable, no errors occured
             if (file != null)
             {
-                //Initialize an instance of the SHA1 class calculator
-                HashAlgorithm sha = new SHA1CryptoServiceProvider();
+                //Initialize an instance of the hash function class calculator
+                HashAlgorithm HashFunction;
+                switch (output.Name)
+                {
+                    case "txtOutputSHA1" :
+                        HashFunction = new SHA1CryptoServiceProvider();
+                        break;
+                    case "txtOutputMD5":
+                        HashFunction = new MD5CryptoServiceProvider();
+                        break;
+                    case "txtOutputSHA256":
+                        HashFunction = new SHA256CryptoServiceProvider();
+                        break;
+                    case "txtOutputSHA512":
+                        HashFunction = new SHA512CryptoServiceProvider();
+                        break;
+                    default :
+                        HashFunction = new SHA1CryptoServiceProvider();
+                        break;
+                }
 
                 //Compute the hash of the file and store it in an array of bytes
-                byte[] result = sha.ComputeHash(file);
+                byte[] result = HashFunction.ComputeHash(file);
 
                 //Make this array readable
                 string message = BitConverter.ToString(result).Replace("-", string.Empty);
 
                 //Show it
                 output.Text = message;
+
+                //Check the hash
+                HashVerification(input, output);
             }
         }
 
@@ -66,6 +88,26 @@ namespace HashChecker
                 }
             }
             return null;
+        }
+
+        /// <summary>
+        /// Verify that the txtOutput is the same as txtInput
+        /// </summary>
+        /// <param name="inputTxtBox">TextBox where user put the hash to verify</param>
+        /// <param name="outputTxtBox">TextBox where the calculated sum is showed</param>
+        /// <remarks>If one of them is blank, there's no need to check</remarks>
+        public void HashVerification(TextBox inputTxtBox, TextBox outputTxtBox)
+        {
+            //Nothing to check if one of them is blank
+            if (inputTxtBox.Text == "" || outputTxtBox.Text == "")
+                inputTxtBox.BackColor = System.Drawing.Color.White; //Make it white!
+            else
+                //If they're the same
+                if (inputTxtBox.Text == outputTxtBox.Text)
+                    inputTxtBox.BackColor = System.Drawing.Color.FromArgb(00, 255, 00); //Grats! Make it green!
+                else
+                    //If they're different
+                    inputTxtBox.BackColor = System.Drawing.Color.FromArgb(255, 00, 00); //Uh ho.. Make it red!!
         }
 
     }
