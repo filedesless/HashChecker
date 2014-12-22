@@ -48,17 +48,19 @@
 //I feel like the compiler is ignoring all my commentaries.
 using System;
 using System.Windows.Forms;
+using System.IO;
 
 namespace HashChecker
 {
     public partial class Form1 : Form
     {
 
-      
-  
         //Initially
 
         Main main = new Main(); //Refer to 'Main.cs'
+
+        Stream file;
+        
 
         public Form1()
         {
@@ -81,9 +83,9 @@ namespace HashChecker
 
             //Label
             label1.Text = String.Format("{0}\n{1}\n{2}",
-                "1 - Click on one hash calculator",
+                "1 - Click on the button",
                 "2 - Choose the file you want to hash",
-                "3 - Copy your verification hash in the white box"
+                "3 - Copy your verification checksum in the appropriated white box"
                 );
         }
 
@@ -91,25 +93,36 @@ namespace HashChecker
 
         //When user click on a button
 
-        private void btnMD5_Click(object sender, EventArgs e)
+        private void btnCompleteHash_Click(object sender, EventArgs e)
         {
-            main.compute(txtInputMD5, txtOutputMD5);
+            main.compute();
+            main.showChecksums(txtOutputMD5, txtOutputSHA1, txtOutputSHA256, txtOutputSHA512);
+            main.HashVerification(txtInputMD5, txtOutputMD5);
+            main.HashVerification(txtInputSHA1, txtOutputSHA1);
+            main.HashVerification(txtInputSHA256, txtOutputSHA256);
+            main.HashVerification(txtInputSHA512, txtOutputSHA512);
         }
 
-        private void btnSHA1_Click(object sender, EventArgs e)
+        private void btnChoose_Click(object sender, EventArgs e)
         {
-            main.compute(txtInputSHA1, txtOutputSHA1);
+            file = main.chooseFile();
+            if (file != null)
+            {
+                btnHash.Enabled = true;
+                main.showLocation(txtLocation);
+            }
+            else
+            {
+                btnHash.Enabled = false;
+                txtLocation.Text = String.Empty;
+                txtOutputMD5.Text = String.Empty;
+                txtOutputSHA1.Text = String.Empty;
+                txtOutputSHA256.Text = String.Empty;
+                txtOutputSHA512.Text = String.Empty;
+            }
+
         }
 
-        private void btnSHA256_Click(object sender, EventArgs e)
-        {
-            main.compute(txtInputSHA256, txtOutputSHA256);
-        }
-
-        private void btnSHA512_Click(object sender, EventArgs e)
-        {
-            main.compute(txtInputSHA512, txtOutputSHA512);
-        }
 
 
 
@@ -134,5 +147,10 @@ namespace HashChecker
         {
             main.HashVerification((TextBox)sender, txtOutputSHA512);
         }
+
+
+
+
+
     }
 }

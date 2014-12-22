@@ -31,53 +31,74 @@ namespace HashChecker
     class Main
     {
 
+        public struct File
+        {
+            public string name;
+            public FileStream data;
+            public string md5;
+            public string sha1;
+            public string sha256;
+            public string sha512;
+        }
+
+        MD5CryptoServiceProvider md5 = new MD5CryptoServiceProvider();
+        SHA1CryptoServiceProvider sha1 = new SHA1CryptoServiceProvider();
+        SHA256CryptoServiceProvider sha256 = new SHA256CryptoServiceProvider();
+        SHA512CryptoServiceProvider sha512 = new SHA512CryptoServiceProvider();
+
+
+        public File file;
+
         /// <summary>
         /// Compute the checksum of a chosen file
         /// </summary>
-        /// <param name="output">Textbox where the calculated sum must be showed</param>
-        /// <param name="Algorithm">Algorithm to use (SHA1, MD5 ...)</param>
-        public void compute(TextBox input, TextBox output)
+        public void compute()
         {
-            //Take a stream of data from a file
-            Stream file = chooseFile();
-
+            
             //If the file was readable, no errors occured
-            if (file != null)
+            if (file.data != null)
             {
-                //Initialize an instance of the hash function class calculator
-                HashAlgorithm HashFunction;
-                switch (output.Name)
+                byte[] hash;
+                if (file.md5 == null)
                 {
-                    case "txtOutputSHA1" :
-                        HashFunction = new SHA1CryptoServiceProvider();
-                        break;
-                    case "txtOutputMD5":
-                        HashFunction = new MD5CryptoServiceProvider();
-                        break;
-                    case "txtOutputSHA256":
-                        HashFunction = new SHA256CryptoServiceProvider();
-                        break;
-                    case "txtOutputSHA512":
-                        HashFunction = new SHA512CryptoServiceProvider();
-                        break;
-                    default :
-                        HashFunction = new SHA1CryptoServiceProvider();
-                        break;
+                    hash = md5.ComputeHash(file.data);
+                    file.md5 = BitConverter.ToString(hash).Replace("-", "");
                 }
 
-                //Compute the hash of the file and store it in an array of bytes
-                byte[] result = HashFunction.ComputeHash(file);
+                if (file.sha1 == null)
+                {
+                    hash = sha1.ComputeHash(file.data);
+                    file.sha1 = BitConverter.ToString(hash).Replace("-", "");
+                }
 
-                //Make this array readable
-                string message = BitConverter.ToString(result).Replace("-", string.Empty);
+                if (file.sha256 == null)
+                {
+                    hash = sha256.ComputeHash(file.data);
+                    file.sha256 = BitConverter.ToString(hash).Replace("-", "");
+                }
 
-                //Show it
-                output.Text = message;
+                if (file.sha512 == null)
+                {
+                    hash = sha512.ComputeHash(file.data);
+                    file.sha512 = BitConverter.ToString(hash).Replace("-", "");
+                }                
 
-                //Check the hash
-                HashVerification(input, output);
             }
         }
+
+        public void showChecksums(TextBox md5, TextBox sha1, TextBox sha256, TextBox sha512)
+        {
+            md5.Text = file.md5;
+            sha1.Text = file.sha1;
+            sha256.Text = file.sha256;
+            sha512.Text = file.sha512;
+        }
+
+        public void showLocation(TextBox location)
+        {
+            location.Text = file.name;
+        }
+
 
         /// <summary>
         /// Choose a file on the disk
@@ -86,7 +107,6 @@ namespace HashChecker
         public Stream chooseFile()
         {
             //Initialize a data stream and my OpenFileDialog box
-            Stream myStream = null;
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
 
             //OpenFileDialog box settings
@@ -100,9 +120,15 @@ namespace HashChecker
             {
                 try
                 {
-                    if ((myStream = openFileDialog1.OpenFile()) != null)
+                    if ((openFileDialog1.OpenFile()) != null)
                     {
-                        return openFileDialog1.OpenFile();
+                        file.name = openFileDialog1.FileName;
+                        file.data = (FileStream)openFileDialog1.OpenFile();
+                        file.md5 = null;
+                        file.sha1 = null;
+                        file.sha256 = null;
+                        file.sha512 = null;
+                        return file.data;
                     }
                 }
                 catch (Exception ex)
@@ -111,7 +137,7 @@ namespace HashChecker
                 }
             }
             return null;
-        }
+        } 
 
         /// <summary>
         /// Verify that the txtOutput is the same as txtInput
