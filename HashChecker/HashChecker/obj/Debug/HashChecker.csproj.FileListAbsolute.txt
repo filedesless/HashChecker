@@ -7,3 +7,12 @@ D:\Data\Docs\Proj\HashChecker\HashChecker\HashChecker\obj\Debug\HashChecker.cspr
 D:\Data\Docs\Proj\HashChecker\HashChecker\HashChecker\obj\Debug\HashChecker.exe
 D:\Data\Docs\Proj\HashChecker\HashChecker\HashChecker\obj\Debug\HashChecker.pdb
 D:\Data\Docs\Proj\HashChecker\HashChecker\HashChecker\obj\Debug\HashChecker.csprojResolveAssemblyReference.cache
+E:\Data\Docs\Proj\HashChecker\HashChecker\HashChecker\bin\Debug\HashChecker.exe.config
+E:\Data\Docs\Proj\HashChecker\HashChecker\HashChecker\obj\Debug\HashChecker.exe
+E:\Data\Docs\Proj\HashChecker\HashChecker\HashChecker\obj\Debug\HashChecker.pdb
+E:\Data\Docs\Proj\HashChecker\HashChecker\HashChecker\bin\Debug\HashChecker.exe
+E:\Data\Docs\Proj\HashChecker\HashChecker\HashChecker\bin\Debug\HashChecker.pdb
+E:\Data\Docs\Proj\HashChecker\HashChecker\HashChecker\obj\Debug\HashChecker.csprojResolveAssemblyReference.cache
+E:\Data\Docs\Proj\HashChecker\HashChecker\HashChecker\obj\Debug\HashChecker.Form1.resources
+E:\Data\Docs\Proj\HashChecker\HashChecker\HashChecker\obj\Debug\HashChecker.Properties.Resources.resources
+E:\Data\Docs\Proj\HashChecker\HashChecker\HashChecker\obj\Debug\HashChecker.csproj.GenerateResource.Cache

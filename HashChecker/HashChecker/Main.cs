@@ -81,7 +81,7 @@ namespace HashChecker
                 {
                     hash = sha512.ComputeHash(file.data);
                     file.sha512 = BitConverter.ToString(hash).Replace("-", "");
-                }                
+                }               
 
             }
         }
@@ -152,7 +152,7 @@ namespace HashChecker
                 inputTxtBox.BackColor = System.Drawing.Color.White; //Make it white!
             else
                 //If they're the same
-                if (inputTxtBox.Text == outputTxtBox.Text)
+                if (inputTxtBox.Text.ToUpper() == outputTxtBox.Text)
                     inputTxtBox.BackColor = System.Drawing.Color.FromArgb(00, 255, 00); //Grats! Make it green!
                 else
                     //If they're different
