@@ -66,6 +66,8 @@ Just grab HashChecker.exe and launch it.
 
 As a .Net program, it currently only supports Windows Operating system.
 
+At the time of this writing, the program has been tested on Linux through wine and seems to work correctly. However no support will be officially given for non-windows users. This software is planned to be ported to Java, wich will then be cross-plateform and allow full support for every common operating system.
+
 CHANGELOG
 =========
 >2014-12-17:
@@ -87,3 +89,4 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
  TO-DO
 ======
 Verify the hash case insensitively (a==A) ~Dun
+Create an 'uploader' section wich will compute and format all the hashes for a file publisher.
