@@ -88,5 +88,9 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
  
  TO-DO
 ======
-Verify the hash case insensitively (a==A) ~Dun
-Create an 'uploader' section wich will compute and format all the hashes for a file publisher.
+- Verify the hash case insensitively (a==A) ~Dun
+
+- Create an 'uploader' section wich will compute and format all the hashes for a file publisher.
+
+- Using the VirusTotal API (https://www.virustotal.com/en/documentation/public-api/) to get security infos about the submitted files on a third tab
+
