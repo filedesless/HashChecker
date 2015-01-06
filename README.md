@@ -70,6 +70,11 @@ At the time of this writing, the program has been tested on Linux through wine a
 
 CHANGELOG
 =========
+>2015-01-06:
+* Release V1.01 is out
+* Added "Publisher's tab"
+* Fixed case sensitivity problem in hash verifying
+* Fixed incoherent hashing ~See ./bug1.txt
 >2014-12-17:
 * Release V1.0 is out
 
@@ -90,7 +95,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 ======
 - Verify the hash case insensitively (a==A) ~Dun
 
-- Create an 'uploader' section wich will compute and format all the hashes for a file publisher.
+- Create an 'uploader' section wich will compute and format all the hashes for a file publisher. ~Dun
 
 - Using the VirusTotal API (https://www.virustotal.com/en/documentation/public-api/) to get security infos about the submitted files on a third tab
 
