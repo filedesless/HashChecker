@@ -74,7 +74,7 @@ CHANGELOG
 * Release V1.01 is out
 * Added "Publisher's tab"
 * Fixed case sensitivity problem in hash verifying
-* Fixed incoherent hashing ~See ./bug1.txt
+* Fixed incoherent hashing ~See ./Bugs/bug1.txt
 >2014-12-17:
 * Release V1.0 is out
 
