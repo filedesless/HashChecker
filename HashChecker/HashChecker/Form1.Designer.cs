@@ -50,7 +50,11 @@
             this.txtInputSHA1 = new System.Windows.Forms.TextBox();
             this.txtOutputSHA1 = new System.Windows.Forms.TextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.rTxtOutput = new System.Windows.Forms.RichTextBox();
+            this.lblTab2 = new System.Windows.Forms.Label();
+            this.btnPublisher = new System.Windows.Forms.Button();
+            this.rTxtInput = new System.Windows.Forms.RichTextBox();
+            this.label7 = new System.Windows.Forms.Label();
             this.tabControl2.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -91,7 +95,7 @@
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage1.Size = new System.Drawing.Size(992, 322);
             this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "Hash a file 1";
+            this.tabPage1.Text = "users";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // btnChoose
@@ -249,22 +253,63 @@
             // 
             // tabPage2
             // 
-            this.tabPage2.Controls.Add(this.listBox1);
+            this.tabPage2.Controls.Add(this.label7);
+            this.tabPage2.Controls.Add(this.rTxtInput);
+            this.tabPage2.Controls.Add(this.rTxtOutput);
+            this.tabPage2.Controls.Add(this.lblTab2);
+            this.tabPage2.Controls.Add(this.btnPublisher);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(779, 322);
+            this.tabPage2.Size = new System.Drawing.Size(992, 322);
             this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Hash a file 2";
+            this.tabPage2.Text = "Publishers";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // listBox1
+            // rTxtOutput
             // 
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.Location = new System.Drawing.Point(7, 78);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(738, 173);
-            this.listBox1.TabIndex = 1;
+            this.rTxtOutput.Location = new System.Drawing.Point(6, 87);
+            this.rTxtOutput.Name = "rTxtOutput";
+            this.rTxtOutput.ReadOnly = true;
+            this.rTxtOutput.Size = new System.Drawing.Size(980, 90);
+            this.rTxtOutput.TabIndex = 4;
+            this.rTxtOutput.Text = "";
+            // 
+            // lblTab2
+            // 
+            this.lblTab2.AutoSize = true;
+            this.lblTab2.Location = new System.Drawing.Point(16, 7);
+            this.lblTab2.Name = "lblTab2";
+            this.lblTab2.Size = new System.Drawing.Size(0, 13);
+            this.lblTab2.TabIndex = 3;
+            // 
+            // btnPublisher
+            // 
+            this.btnPublisher.Location = new System.Drawing.Point(711, 7);
+            this.btnPublisher.Name = "btnPublisher";
+            this.btnPublisher.Size = new System.Drawing.Size(275, 75);
+            this.btnPublisher.TabIndex = 2;
+            this.btnPublisher.Text = "Choose a file";
+            this.btnPublisher.UseVisualStyleBackColor = true;
+            this.btnPublisher.Click += new System.EventHandler(this.btnPublisher_Click);
+            // 
+            // rTxtInput
+            // 
+            this.rTxtInput.Location = new System.Drawing.Point(6, 226);
+            this.rTxtInput.Name = "rTxtInput";
+            this.rTxtInput.Size = new System.Drawing.Size(980, 90);
+            this.rTxtInput.TabIndex = 5;
+            this.rTxtInput.Text = "";
+            this.rTxtInput.TextChanged += new System.EventHandler(this.richTextBox1_TextChanged);
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(6, 210);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(386, 13);
+            this.label7.TabIndex = 6;
+            this.label7.Text = "Compare box. Copy a publisher\'s ouput here to compare with your computed one";
             // 
             // Form1
             // 
@@ -279,6 +324,7 @@
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
+            this.tabPage2.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -299,7 +345,6 @@
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.Button btnHash;
-        private System.Windows.Forms.ListBox listBox1;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
@@ -307,6 +352,11 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txtLocation;
         private System.Windows.Forms.Button btnChoose;
+        private System.Windows.Forms.Label lblTab2;
+        private System.Windows.Forms.Button btnPublisher;
+        private System.Windows.Forms.RichTextBox rTxtOutput;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.RichTextBox rTxtInput;
     }
 }
 

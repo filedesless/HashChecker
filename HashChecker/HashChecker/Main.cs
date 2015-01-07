@@ -99,6 +99,21 @@ namespace HashChecker
             location.Text = file.name;
         }
 
+        public void showInfos(RichTextBox output)
+        {
+            output.Text = "";
+            output.Text = string.Format("{0} : {1}\n{2} : {3}\n{4} : {5}\n{6} : {7}",
+                "MD5",
+                file.md5,
+                "SHA1",
+                file.sha1,
+                "SHA256",
+                file.sha256,
+                "SHA512",
+                file.sha512
+                );
+        }
+
 
         /// <summary>
         /// Choose a file on the disk
@@ -146,6 +161,26 @@ namespace HashChecker
         /// <param name="outputTxtBox">TextBox where the calculated sum is showed</param>
         /// <remarks>If one of them is blank, there's no need to check</remarks>
         public void HashVerification(TextBox inputTxtBox, TextBox outputTxtBox)
+        {
+            //Nothing to check if one of them is blank
+            if (inputTxtBox.Text == "" || outputTxtBox.Text == "")
+                inputTxtBox.BackColor = System.Drawing.Color.White; //Make it white!
+            else
+                //If they're the same
+                if (inputTxtBox.Text.ToUpper() == outputTxtBox.Text)
+                    inputTxtBox.BackColor = System.Drawing.Color.FromArgb(00, 255, 00); //Grats! Make it green!
+                else
+                    //If they're different
+                    inputTxtBox.BackColor = System.Drawing.Color.FromArgb(255, 00, 00); //Uh ho.. Make it red!!
+        }
+
+        /// <summary>
+        /// Verify that the txtOutput is the same as txtInput. Takes RichTextBoxes instead of TextBoxes as parameters
+        /// </summary>
+        /// <param name="inputTxtBox">RichTextBox where user put the hash to verify</param>
+        /// <param name="outputTxtBox">RichTextBox where the calculated sum is showed</param>
+        /// <remarks>If one of them is blank, there's no need to check</remarks>
+        public void HashVerification(RichTextBox inputTxtBox, RichTextBox outputTxtBox)
         {
             //Nothing to check if one of them is blank
             if (inputTxtBox.Text == "" || outputTxtBox.Text == "")
