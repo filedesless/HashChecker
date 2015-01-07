@@ -9,7 +9,7 @@
  * 
  * The MIT License (MIT)
 
- * Copyright (c) <year> <copyright holders>
+ * Copyright (c) 2014-2015 aiglebleu
 
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -87,6 +87,11 @@ namespace HashChecker
                 "2 - Choose the file you want to hash",
                 "3 - Copy your verification checksum in the appropriated white box"
                 );
+            lblTab2.Text = String.Format("{0}\n{1}\n{2}",
+                "1 - Click on the button",
+                "2 - Choose the file you want to hash",
+                "3 - Publish the output with your file to let users verify the hash"
+                );
         }
 
 
@@ -123,6 +128,18 @@ namespace HashChecker
 
         }
 
+        private void btnPublisher_Click(object sender, EventArgs e)
+        {
+            file = main.chooseFile();
+            if (file != null)
+            {
+                main.compute();
+                main.showInfos(rTxtOutput);
+            }
+            else
+                MessageBox.Show("Error. You chose a null file!");
+        }
+
 
 
 
@@ -147,6 +164,13 @@ namespace HashChecker
         {
             main.HashVerification((TextBox)sender, txtOutputSHA512);
         }
+
+        private void richTextBox1_TextChanged(object sender, EventArgs e)
+        {
+            main.HashVerification(rTxtInput, rTxtOutput);
+        }
+
+
 
 
 
