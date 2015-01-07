@@ -100,3 +100,5 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 - Using the VirusTotal API (https://www.virustotal.com/en/documentation/public-api/) to get security infos about the submitted files on a third tab
 
+- Adding a progress bar system or a cancel option for freezes / long time without response (in the case of hashing big files for example)
+
