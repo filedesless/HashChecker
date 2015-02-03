@@ -63,24 +63,28 @@ namespace HashChecker
                 {
                     hash = md5.ComputeHash(file.data);
                     file.md5 = BitConverter.ToString(hash).Replace("-", "");
+                    file.data.Position = 0;
                 }
 
                 if (file.sha1 == null)
                 {
                     hash = sha1.ComputeHash(file.data);
                     file.sha1 = BitConverter.ToString(hash).Replace("-", "");
+                    file.data.Position = 0;
                 }
 
                 if (file.sha256 == null)
                 {
                     hash = sha256.ComputeHash(file.data);
                     file.sha256 = BitConverter.ToString(hash).Replace("-", "");
+                    file.data.Position = 0;
                 }
 
                 if (file.sha512 == null)
                 {
                     hash = sha512.ComputeHash(file.data);
                     file.sha512 = BitConverter.ToString(hash).Replace("-", "");
+                    file.data.Position = 0;
                 }               
 
             }

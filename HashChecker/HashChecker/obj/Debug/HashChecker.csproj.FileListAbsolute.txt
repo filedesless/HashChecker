@@ -25,3 +25,12 @@ E:\Data\Docs\Proj\HashChecker\HashChecker\HashChecker\obj\Debug\HashChecker.cspr
 \\VBOXSVR\data\Data\Docs\Proj\HashChecker\HashChecker\HashChecker\obj\Debug\HashChecker.Form1.resources
 \\VBOXSVR\data\Data\Docs\Proj\HashChecker\HashChecker\HashChecker\obj\Debug\HashChecker.Properties.Resources.resources
 \\VBOXSVR\data\Data\Docs\Proj\HashChecker\HashChecker\HashChecker\obj\Debug\HashChecker.csproj.GenerateResource.Cache
+D:\HashChecker\HashChecker\HashChecker\bin\Debug\HashChecker.exe.config
+D:\HashChecker\HashChecker\HashChecker\obj\Debug\HashChecker.exe
+D:\HashChecker\HashChecker\HashChecker\obj\Debug\HashChecker.pdb
+D:\HashChecker\HashChecker\HashChecker\bin\Debug\HashChecker.exe
+D:\HashChecker\HashChecker\HashChecker\bin\Debug\HashChecker.pdb
+D:\HashChecker\HashChecker\HashChecker\obj\Debug\HashChecker.csprojResolveAssemblyReference.cache
+D:\HashChecker\HashChecker\HashChecker\obj\Debug\HashChecker.Form1.resources
+D:\HashChecker\HashChecker\HashChecker\obj\Debug\HashChecker.Properties.Resources.resources
+D:\HashChecker\HashChecker\HashChecker\obj\Debug\HashChecker.csproj.GenerateResource.Cache
