@@ -70,11 +70,14 @@ At the time of this writing, the program has been tested on Linux through wine a
 
 CHANGELOG
 =========
+>2015-02-03
+ * Refixed the same hashing problem (lost between two commits?)
+
 >2015-01-06:
 * Release V1.01 is out
 * Added "Publisher's tab"
 * Fixed case sensitivity problem in hash verifying
-* Fixed incoherent hashing ~See ./Bugs/bug1.txt
+* Fixed incoherent hashing
 
 >2014-12-17:
 * Release V1.0 is out
