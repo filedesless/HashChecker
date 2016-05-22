@@ -70,8 +70,18 @@ At the time of this writing, the program has been tested on Linux through wine a
 
 CHANGELOG
 =========
+>2015-05-22
+* Cleaned up a bit
+* Changed UI
+* Repaired broken publisher's option
+
+>2015-05-21
+* Some small changes, nothing major
+* Except an almost complete rewrite of the shit.
+* Ho, and main.cs is kill.
+
 >2015-02-03
- * Refixed the same hashing problem (lost between two commits?)
+* Refixed the same hashing problem (lost between two commits?)
 
 >2015-01-06:
 * Release V1.01 is out
