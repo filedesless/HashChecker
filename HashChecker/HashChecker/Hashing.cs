@@ -1,6 +1,5 @@
-﻿using System.ComponentModel;
-using HashChecker.Hashing_classes;
-using System.Windows.Forms;
+﻿using HashChecker.Hashing_classes;
+using System.ComponentModel;
 
 namespace HashChecker
 {
