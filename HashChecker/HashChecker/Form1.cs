@@ -45,10 +45,11 @@
 
  */
 
-//I feel like the compiler is ignoring all my commentaries.
+//I feel like the compiler is ignoring all my comments.
 using System;
 using System.Windows.Forms;
-using System.IO;
+using System.ComponentModel;
+using HashChecker.Utilities;
 
 namespace HashChecker
 {
@@ -56,12 +57,7 @@ namespace HashChecker
     {
 
         //Initially
-
-        Main main = new Main(); //Refer to 'Main.cs'
-
-        Stream file;
-        
-
+       
         public Form1()
         {
             InitializeComponent();
@@ -81,100 +77,272 @@ namespace HashChecker
             toolTip1.SetToolTip(this.txtOutputSHA256, "Click the 'SHA256 Calculator' button to get the SHA256 hash value here");
             toolTip1.SetToolTip(this.txtOutputSHA512, "Click the 'SHA512 Calculator' button to get the SHA512 hash value here");
 
-            //Label
-            label1.Text = String.Format("{0}\n{1}\n{2}",
-                "1 - Click on the button",
-                "2 - Choose the file you want to hash",
-                "3 - Copy your verification checksum in the appropriated white box"
-                );
-            lblTab2.Text = String.Format("{0}\n{1}\n{2}",
-                "1 - Click on the button",
-                "2 - Choose the file you want to hash",
-                "3 - Publish the output with your file to let users verify the hash"
-                );
+            backgroundWorker1.WorkerReportsProgress = true;
+            backgroundWorker1.WorkerSupportsCancellation = true;
+
         }
 
-
-
-        //When user click on a button
+        #region buttons
 
         private void btnCompleteHash_Click(object sender, EventArgs e)
         {
-            main.compute();
-            main.showChecksums(txtOutputMD5, txtOutputSHA1, txtOutputSHA256, txtOutputSHA512);
-            main.HashVerification(txtInputMD5, txtOutputMD5);
-            main.HashVerification(txtInputSHA1, txtOutputSHA1);
-            main.HashVerification(txtInputSHA256, txtOutputSHA256);
-            main.HashVerification(txtInputSHA512, txtOutputSHA512);
+            clearTextBoxes();
+            btnChoose.Enabled = false;
+            btnHash.Enabled = false;
+            btnCancel.Enabled = true;
+            lblCurrentHash.Text = "MD5...";
+
+            if (!backgroundWorker1.IsBusy)
+            {
+                backgroundWorker1.RunWorkerAsync();
+            }
         }
 
         private void btnChoose_Click(object sender, EventArgs e)
         {
-            file = main.chooseFile();
-            if (file != null)
-            {
-                btnHash.Enabled = true;
-                main.showLocation(txtLocation);
-            }
-            else
-            {
-                btnHash.Enabled = false;
-                txtLocation.Text = String.Empty;
-                txtOutputMD5.Text = String.Empty;
-                txtOutputSHA1.Text = String.Empty;
-                txtOutputSHA256.Text = String.Empty;
-                txtOutputSHA512.Text = String.Empty;
-            }
+            openFileDialog1.ShowDialog();
+        }
 
+        private void openFileDialog1_FileOk(object sender, CancelEventArgs e)
+        {
+            clearTextBoxes();
+
+            // Save the filename and enable hash button
+            txtLocation.Text = openFileDialog1.FileName;
+            btnHash.Enabled = true;
+
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            backgroundWorker1.CancelAsync();
+            btnCancel.Enabled = false;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            btnCancel.PerformClick();
+            clearTextBoxes();
         }
 
         private void btnPublisher_Click(object sender, EventArgs e)
         {
-            file = main.chooseFile();
-            if (file != null)
+            /*
+            if (main.chooseFile())
             {
-                main.compute();
-                main.showInfos(rTxtOutput);
+                //main.compute();
+                //main.showInfos(rTxtOutput);
             }
             else
                 MessageBox.Show("Error. You chose a null file!");
+            */
         }
 
+        #endregion
 
-
-
-        //When Text Boxes change
-
-        private void txtInputSHA1_TextChanged(object sender, EventArgs e)
-        {
-            main.HashVerification((TextBox)sender, txtOutputSHA1);
-        }
+        #region textBoxes
 
         private void txtInputMD5_TextChanged(object sender, EventArgs e)
         {
-            main.HashVerification((TextBox)sender, txtOutputMD5);
+            compareTextBoxes((TextBox)sender, txtOutputMD5);
+        }
+
+        private void txtInputSHA1_TextChanged(object sender, EventArgs e)
+        {
+            compareTextBoxes((TextBox)sender, txtOutputSHA1);
         }
 
         private void txtInputSHA256_TextChanged(object sender, EventArgs e)
         {
-            main.HashVerification((TextBox)sender, txtOutputSHA256);
+            compareTextBoxes((TextBox)sender, txtOutputSHA256);
         }
 
         private void txtInputSHA512_TextChanged(object sender, EventArgs e)
         {
-            main.HashVerification((TextBox)sender, txtOutputSHA512);
+            compareTextBoxes((TextBox)sender, txtOutputSHA512);
         }
 
         private void richTextBox1_TextChanged(object sender, EventArgs e)
         {
-            main.HashVerification(rTxtInput, rTxtOutput);
+            compareTextBoxes(rTxtInput, rTxtOutput);
+        }
+
+        #endregion
+
+        #region toolStripMenuItems
+
+        private void openToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            btnChoose.PerformClick();
+        }
+
+        private void closeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void licenseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(constants.license, "MIT License");
+        }
+
+        private void hTLLToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://hightechlowlife.eu");
+        }
+
+        private void versionToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(String.Format("HashChecker v{0}", constants.version), constants.version);
+        }
+
+        private void usersToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(String.Format("{0}\n{1}\n{2}",
+                "1 - Click on the button",
+                "2 - Choose the file you want to hash",
+                "3 - Copy your verification checksum in the appropriated white box"
+                ), "End user help");
+        }
+
+        private void publishersToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(String.Format("{0}\n{1}\n{2}",
+                "1 - Click on the button",
+                "2 - Choose the file you want to hash",
+                "3 - Publish the output with your file to let users verify the hash"
+                ), "Publisher help");
+        }
+
+        #endregion
+
+        #region backgroundWorker1
+
+        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
+        {
+            // Computes hashes in background
+            BackgroundWorker worker = sender as BackgroundWorker;
+            Hashing compute = new Hashing(worker, txtLocation.Text);
+
+            if (!worker.CancellationPending)
+                file_struct.md5 = compute.md5();
+            else
+                e.Cancel = true;
+
+            if (!worker.CancellationPending)
+                file_struct.sha1 = compute.sha1();
+            else
+                e.Cancel = true;
+
+            if (!worker.CancellationPending)
+                file_struct.sha256 = compute.sha256();
+            else
+                e.Cancel = true;
+
+            if (!worker.CancellationPending)
+                file_struct.sha512 = compute.sha512();
+            else
+                e.Cancel = true;
+
+        }
+
+        private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            if (e.ProgressPercentage <= 100 && e.ProgressPercentage >= 0) // Normal reporting
+            {
+                progressBar1.Value = e.ProgressPercentage;
+            }
+
+            if (e.ProgressPercentage == 1000) // User requested cancellation
+            {
+                progressBar1.Value = 0;
+            }
+
+            if (e.UserState != null) // One computation finished
+            {
+                string hash = e.UserState.ToString();
+
+                switch (hash.Length)
+                {
+                    case 32:
+                        txtOutputMD5.Text = hash;
+                        compareTextBoxes(txtInputMD5, txtOutputMD5);
+                        lblCurrentHash.Text = "SHA1...";
+                        break;
+                    case 40:
+                        txtOutputSHA1.Text = hash;
+                        compareTextBoxes(txtInputSHA1, txtOutputSHA1);
+                        lblCurrentHash.Text = "SHA256...";
+                        break;
+                    case 64:
+                        txtOutputSHA256.Text = hash;
+                        compareTextBoxes(txtInputSHA256, txtOutputSHA256);
+                        lblCurrentHash.Text = "SHA512...";
+                        break;
+                    case 128:
+                        txtOutputSHA512.Text = hash;
+                        compareTextBoxes(txtInputSHA512, txtOutputSHA512);
+                        lblCurrentHash.Text = "Idle...";
+                        break;
+                }
+
+            }
+        }
+
+        private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            if (e.Error != null)
+            {
+                MessageBox.Show(e.Error.ToString());
+            }
+
+            progressBar1.Value = 0;
+            btnChoose.Enabled = true;
+            btnHash.Enabled = true;
+            btnCancel.Enabled = false;
+            lblCurrentHash.Text = "Idle...";
+        }
+
+        #endregion
+
+        #region utilities
+
+        private void compareTextBoxes(TextBox inputTxtBox, TextBox outputTxtBox)
+        {
+            inputTxtBox.BackColor = TextBoxColor(inputTxtBox.Text, outputTxtBox.Text);
+        }
+
+        private void compareTextBoxes(RichTextBox inputTxtBox, RichTextBox outputTxtBox)
+        {
+            inputTxtBox.BackColor = TextBoxColor(inputTxtBox.Text, outputTxtBox.Text);
+        }
+
+        private System.Drawing.Color TextBoxColor(string txt1, string txt2)
+        {
+            //Nothing to check if one of them is blank
+            if (txt1 == "" || txt2 == "")
+                return System.Drawing.Color.White; //Make it white!
+            else
+                //If they're the same
+                if (txt1.ToUpper() == txt2.ToUpper())
+                    return System.Drawing.Color.Green; //Grats! Make it green!
+            else
+                //If they're different
+                return System.Drawing.Color.Red; //Uh ho.. Make it red!!
+        }
+
+        private void clearTextBoxes()
+        {
+            // Empty the textBoxes
+            txtOutputMD5.Text = String.Empty;
+            txtOutputSHA1.Text = String.Empty;
+            txtOutputSHA256.Text = String.Empty;
+            txtOutputSHA512.Text = String.Empty;
         }
 
 
-
-
-
-
+        #endregion
 
     }
 }
+

@@ -34,3 +34,16 @@ D:\HashChecker\HashChecker\HashChecker\obj\Debug\HashChecker.csprojResolveAssemb
 D:\HashChecker\HashChecker\HashChecker\obj\Debug\HashChecker.Form1.resources
 D:\HashChecker\HashChecker\HashChecker\obj\Debug\HashChecker.Properties.Resources.resources
 D:\HashChecker\HashChecker\HashChecker\obj\Debug\HashChecker.csproj.GenerateResource.Cache
+C:\Users\user\Source\Repos\HashChecker\HashChecker\HashChecker\obj\Debug\HashChecker.Form1.resources
+C:\Users\user\Source\Repos\HashChecker\HashChecker\HashChecker\obj\Debug\HashChecker.csproj.GenerateResource.Cache
+C:\Users\user\Source\Repos\HashChecker\HashChecker\HashChecker\bin\Debug\HashChecker.exe.config
+C:\Users\user\Source\Repos\HashChecker\HashChecker\HashChecker\bin\Debug\HashChecker.exe
+C:\Users\user\Source\Repos\HashChecker\HashChecker\HashChecker\bin\Debug\HashChecker.pdb
+C:\Users\user\Source\Repos\HashChecker\HashChecker\HashChecker\obj\Debug\HashChecker.Properties.Resources.resources
+C:\Users\user\Source\Repos\HashChecker\HashChecker\HashChecker\obj\Debug\HashChecker.exe
+C:\Users\user\Source\Repos\HashChecker\HashChecker\HashChecker\obj\Debug\HashChecker.pdb
+C:\Users\user\Source\Repos\HashChecker\HashChecker\HashChecker\bin\Debug\HashChecker.exe.manifest
+C:\Users\user\Source\Repos\HashChecker\HashChecker\HashChecker\bin\Debug\HashChecker.application
+C:\Users\user\Source\Repos\HashChecker\HashChecker\HashChecker\obj\Debug\HashChecker.exe.manifest
+C:\Users\user\Source\Repos\HashChecker\HashChecker\HashChecker\obj\Debug\HashChecker.application
+C:\Users\user\Source\Repos\HashChecker\HashChecker\HashChecker\obj\Debug\HashChecker.csprojResolveAssemblyReference.cache
