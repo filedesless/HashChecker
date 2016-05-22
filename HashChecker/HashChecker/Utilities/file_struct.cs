@@ -7,5 +7,10 @@
         public static string sha1;
         public static string sha256;
         public static string sha512;
+
+        public static void clear()
+        {
+            name = md5 = sha1 = sha256 = sha512 = "";
+        }
     }
 }

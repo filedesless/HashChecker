@@ -46,4 +46,5 @@ C:\Users\user\Source\Repos\HashChecker\HashChecker\HashChecker\bin\Debug\HashChe
 C:\Users\user\Source\Repos\HashChecker\HashChecker\HashChecker\bin\Debug\HashChecker.application
 C:\Users\user\Source\Repos\HashChecker\HashChecker\HashChecker\obj\Debug\HashChecker.exe.manifest
 C:\Users\user\Source\Repos\HashChecker\HashChecker\HashChecker\obj\Debug\HashChecker.application
+C:\Users\user\Source\Repos\HashChecker\HashChecker\HashChecker\obj\Debug\HashChecker.frmPublisher.resources
 C:\Users\user\Source\Repos\HashChecker\HashChecker\HashChecker\obj\Debug\HashChecker.csprojResolveAssemblyReference.cache

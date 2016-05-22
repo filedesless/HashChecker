@@ -86,16 +86,27 @@ namespace HashChecker
 
         private void btnCompleteHash_Click(object sender, EventArgs e)
         {
-            clearTextBoxes();
-            btnChoose.Enabled = false;
-            btnHash.Enabled = false;
-            btnCancel.Enabled = true;
-            lblCurrentHash.Text = "MD5...";
+            startHashing("all");
+        }
 
-            if (!backgroundWorker1.IsBusy)
-            {
-                backgroundWorker1.RunWorkerAsync();
-            }
+        private void btnMD5_Click(object sender, EventArgs e)
+        {
+            startHashing("md5");
+        }
+
+        private void btnSHA1_Click(object sender, EventArgs e)
+        {
+            startHashing("sha1");
+        }
+
+        private void btnSHA256_Click(object sender, EventArgs e)
+        {
+            startHashing("sha256");
+        }
+
+        private void btnSHA512_Click(object sender, EventArgs e)
+        {
+            startHashing("sha512");
         }
 
         private void btnChoose_Click(object sender, EventArgs e)
@@ -108,8 +119,10 @@ namespace HashChecker
             clearTextBoxes();
 
             // Save the filename and enable hash button
-            txtLocation.Text = openFileDialog1.FileName;
-            btnHash.Enabled = true;
+            toggleHashButtons(true);
+            file_struct.clear();
+
+            file_struct.name = txtLocation.Text = openFileDialog1.FileName;
 
         }
 
@@ -119,23 +132,10 @@ namespace HashChecker
             btnCancel.Enabled = false;
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void btnClear_Click(object sender, EventArgs e)
         {
             btnCancel.PerformClick();
             clearTextBoxes();
-        }
-
-        private void btnPublisher_Click(object sender, EventArgs e)
-        {
-            /*
-            if (main.chooseFile())
-            {
-                //main.compute();
-                //main.showInfos(rTxtOutput);
-            }
-            else
-                MessageBox.Show("Error. You chose a null file!");
-            */
         }
 
         #endregion
@@ -144,27 +144,22 @@ namespace HashChecker
 
         private void txtInputMD5_TextChanged(object sender, EventArgs e)
         {
-            compareTextBoxes((TextBox)sender, txtOutputMD5);
+            displaying.compareTextBoxes((TextBox)sender, txtOutputMD5);
         }
 
         private void txtInputSHA1_TextChanged(object sender, EventArgs e)
         {
-            compareTextBoxes((TextBox)sender, txtOutputSHA1);
+            displaying.compareTextBoxes((TextBox)sender, txtOutputSHA1);
         }
 
         private void txtInputSHA256_TextChanged(object sender, EventArgs e)
         {
-            compareTextBoxes((TextBox)sender, txtOutputSHA256);
+            displaying.compareTextBoxes((TextBox)sender, txtOutputSHA256);
         }
 
         private void txtInputSHA512_TextChanged(object sender, EventArgs e)
         {
-            compareTextBoxes((TextBox)sender, txtOutputSHA512);
-        }
-
-        private void richTextBox1_TextChanged(object sender, EventArgs e)
-        {
-            compareTextBoxes(rTxtInput, rTxtOutput);
+            displaying.compareTextBoxes((TextBox)sender, txtOutputSHA512);
         }
 
         #endregion
@@ -214,6 +209,25 @@ namespace HashChecker
                 ), "Publisher help");
         }
 
+        private void publishToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string publisherString = String.Format(
+                "{0,-6} : {1}\n" +
+                "{2,-6} : {3}\n" +
+                "{4,-6} : {5}\n" +
+                "{6,-6} : {7}",
+                    "MD5", file_struct.md5,
+                    "SHA1", file_struct.sha1,
+                    "SHA256", file_struct.sha256,
+                    "SHA512", file_struct.sha512
+                );
+            Form frm = new frmPublisher(publisherString);
+
+            this.Hide();
+            frm.ShowDialog();
+            this.Show();
+        }
+
         #endregion
 
         #region backgroundWorker1
@@ -223,26 +237,40 @@ namespace HashChecker
             // Computes hashes in background
             BackgroundWorker worker = sender as BackgroundWorker;
             Hashing compute = new Hashing(worker, txtLocation.Text);
+            string jobList = e.Argument.ToString();
 
-            if (!worker.CancellationPending)
-                file_struct.md5 = compute.md5();
-            else
-                e.Cancel = true;
+                if (!worker.CancellationPending)
+                {
+                    if (jobList == "all" || jobList == "md5")
+                        file_struct.md5 = compute.md5();
+                }
+                else
+                    e.Cancel = true;
 
-            if (!worker.CancellationPending)
-                file_struct.sha1 = compute.sha1();
-            else
-                e.Cancel = true;
+                if (!worker.CancellationPending)
+                {
+                    if (jobList == "all" || jobList == "sha1")
+                        file_struct.sha1 = compute.sha1();
+                }
+                else
+                    e.Cancel = true;
 
-            if (!worker.CancellationPending)
-                file_struct.sha256 = compute.sha256();
-            else
-                e.Cancel = true;
+                if (!worker.CancellationPending)
+                {
+                    if (jobList == "all" || jobList == "sha256")
+                        file_struct.sha256 = compute.sha256();
+                }
+                else
+                    e.Cancel = true;
 
-            if (!worker.CancellationPending)
-                file_struct.sha512 = compute.sha512();
-            else
-                e.Cancel = true;
+                if (!worker.CancellationPending)
+                {
+                    if (jobList == "all" || jobList == "sha512")
+                        file_struct.sha512 = compute.sha512();
+                }
+                else
+                    e.Cancel = true;
+
 
         }
 
@@ -266,22 +294,22 @@ namespace HashChecker
                 {
                     case 32:
                         txtOutputMD5.Text = hash;
-                        compareTextBoxes(txtInputMD5, txtOutputMD5);
+                        displaying.compareTextBoxes(txtInputMD5, txtOutputMD5);
                         lblCurrentHash.Text = "SHA1...";
                         break;
                     case 40:
                         txtOutputSHA1.Text = hash;
-                        compareTextBoxes(txtInputSHA1, txtOutputSHA1);
+                        displaying.compareTextBoxes(txtInputSHA1, txtOutputSHA1);
                         lblCurrentHash.Text = "SHA256...";
                         break;
                     case 64:
                         txtOutputSHA256.Text = hash;
-                        compareTextBoxes(txtInputSHA256, txtOutputSHA256);
+                        displaying.compareTextBoxes(txtInputSHA256, txtOutputSHA256);
                         lblCurrentHash.Text = "SHA512...";
                         break;
                     case 128:
                         txtOutputSHA512.Text = hash;
-                        compareTextBoxes(txtInputSHA512, txtOutputSHA512);
+                        displaying.compareTextBoxes(txtInputSHA512, txtOutputSHA512);
                         lblCurrentHash.Text = "Idle...";
                         break;
                 }
@@ -298,7 +326,7 @@ namespace HashChecker
 
             progressBar1.Value = 0;
             btnChoose.Enabled = true;
-            btnHash.Enabled = true;
+            toggleHashButtons(true);
             btnCancel.Enabled = false;
             lblCurrentHash.Text = "Idle...";
         }
@@ -307,28 +335,43 @@ namespace HashChecker
 
         #region utilities
 
-        private void compareTextBoxes(TextBox inputTxtBox, TextBox outputTxtBox)
+        private void startHashing(string algo)
         {
-            inputTxtBox.BackColor = TextBoxColor(inputTxtBox.Text, outputTxtBox.Text);
+            string label;
+            if (algo == "all")
+                label = "md5";
+            else
+                label = algo;
+
+            btnChoose.Enabled = false;
+            btnCancel.Enabled = true;
+            toggleHashButtons(false);
+            lblCurrentHash.Text = String.Format("{0}...", label.ToUpper());
+
+            if (!backgroundWorker1.IsBusy)
+            {
+                backgroundWorker1.RunWorkerAsync(algo);
+            }
         }
 
-        private void compareTextBoxes(RichTextBox inputTxtBox, RichTextBox outputTxtBox)
+        private void toggleHashButtons(bool state)
         {
-            inputTxtBox.BackColor = TextBoxColor(inputTxtBox.Text, outputTxtBox.Text);
-        }
-
-        private System.Drawing.Color TextBoxColor(string txt1, string txt2)
-        {
-            //Nothing to check if one of them is blank
-            if (txt1 == "" || txt2 == "")
-                return System.Drawing.Color.White; //Make it white!
-            else
-                //If they're the same
-                if (txt1.ToUpper() == txt2.ToUpper())
-                    return System.Drawing.Color.Green; //Grats! Make it green!
-            else
-                //If they're different
-                return System.Drawing.Color.Red; //Uh ho.. Make it red!!
+            foreach(Control btn in Controls)
+            {
+                if (btn.GetType() == typeof(Button))
+                {
+                    switch (btn.Name)
+                    {
+                        case "btnHash":
+                        case "btnMD5":
+                        case "btnSHA1":
+                        case "btnSHA256":
+                        case "btnSHA512":
+                            btn.Enabled = state;
+                            break;
+                    }
+                }
+            }
         }
 
         private void clearTextBoxes()

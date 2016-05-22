@@ -2,7 +2,7 @@
 {
     static class constants
     {
-        public const string version = "1.02";
+        public const string version = "1.03";
         public const string license =
 @"The MIT License (MIT)
 Copyright(c) 2014 aigleleu
